@@ -97,13 +97,7 @@ const Home = () => {
         />
       </Box>
       {selectedSuggestion && fetchedWeather && (
-        <Flex
-          justifyContent="space-around"
-          bgColor={bgColor}
-          mt={2}
-          borderColor="red"
-          borderWidth={2}
-        >
+        <Flex justifyContent="space-around" bgColor={bgColor} mt={2}>
           <Box flex="1" mx={2}>
             <MetricsCard forecast={fetchedWeather} />
           </Box>

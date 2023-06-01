@@ -39,8 +39,8 @@ const SearchBar = ({
   const linkColor = useColorModeValue('gray.600', 'gray.300');
   const bgColor = useColorModeValue('gray.100', 'gray.900');
   const toast = useToast();
-  
- const handleSuggestionSelect = (suggestion: Location) => {
+
+  const handleSuggestionSelect = (suggestion: Location) => {
     onSuggestionSelect(suggestion);
     setShowSuggestions(false); // Hide suggestions after selecting
   };
@@ -126,49 +126,59 @@ const SearchBar = ({
         ) : suggestions.length > 0 ? (
           <>
             {suggestions.map((suggestion: Location) => {
-                   const distance = coords ? Math.round(getDistance(coords.latitude, coords.longitude, suggestion.lat, suggestion.lon) * 10) / 10 : 0;
+              const distance = coords
+                ? Math.round(
+                    getDistance(
+                      coords.latitude,
+                      coords.longitude,
+                      suggestion.lat,
+                      suggestion.lon
+                    ) * 10
+                  ) / 10
+                : 0;
 
-             return (
-             <motion.div
-             key={suggestion.id}
-             initial={{ opacity: 0, y: -10 }}
-             animate={{ opacity: 1, y: 0 }}
-             exit={{ opacity: 0, y: -10 }}>
-             <ListItem
-                bg="white"
-                bgColor={bgColor}
-                border="1px solid gray"
-                borderRadius="lg"
-                boxShadow="md"
-                overflow="hidden"
-                transition="all 0.2s ease-out"
-                _hover={{
-                  transform: 'translateY(-2px)',
-                  shadow: 'lg',
-                  cursor: 'pointer',
-                  bg: darken(bgColor, 0.1),
-                }}
-                _active={{ transform: 'translateY(0)' }}
-                mt="0.1em"
-                mb="0.2em"
-                px={3}
-                py={2}
-                onClick={() => handleSuggestionSelect(suggestion)}
-              >
-                <Box color={linkColor}>
-                  <Text fontSize="l" fontWeight="semibold">
-                    {suggestion.name}
-                  </Text>
-                  <Text fontSize="sm" mb={2}>
-                    {suggestion.region}{' '}
-                    {distance
-                      ? `  |   ${distance} mi. away`
-                      : ''}
-                  </Text>
-                </Box>
-              </ListItem>
-              </motion.div>
-            )})}
+              return (
+                <motion.div
+                  key={suggestion.id}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                >
+                  <ListItem
+                    zIndex={100}
+                    bg="white"
+                    bgColor={bgColor}
+                    border="1px solid gray"
+                    borderRadius="lg"
+                    boxShadow="md"
+                    overflow="hidden"
+                    transition="all 0.2s ease-out"
+                    _hover={{
+                      transform: 'translateY(-2px)',
+                      shadow: 'lg',
+                      cursor: 'pointer',
+                      bg: darken(bgColor, 0.1),
+                    }}
+                    _active={{ transform: 'translateY(0)' }}
+                    mt="0.1em"
+                    mb="0.2em"
+                    px={3}
+                    py={2}
+                    onClick={() => handleSuggestionSelect(suggestion)}
+                  >
+                    <Box color={linkColor}>
+                      <Text fontSize="l" fontWeight="semibold">
+                        {suggestion.name}
+                      </Text>
+                      <Text fontSize="sm" mb={2}>
+                        {suggestion.region}{' '}
+                        {distance ? `  |   ${distance} mi. away` : ''}
+                      </Text>
+                    </Box>
+                  </ListItem>
+                </motion.div>
+              );
+            })}
           </>
         ) : (
           <ListItem

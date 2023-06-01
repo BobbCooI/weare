@@ -5,8 +5,7 @@ import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-
-const ForecastCard = ({ forecast }: {  forecast: ForecastResponse}) => {
+const ForecastCard = ({ forecast }: { forecast: ForecastResponse }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const linkColor = useColorModeValue('gray.600', 'gray.300');
   const bgColor = useColorModeValue('gray.100', 'gray.900');
@@ -34,7 +33,6 @@ const ForecastCard = ({ forecast }: {  forecast: ForecastResponse}) => {
         boxShadow="md"
         p="4"
         transition="all 0.2s ease-in-out"
-        _hover={{ transform: 'scale(1.01)' }}
         className="hover:shadow-lg"
       >
         <Flex

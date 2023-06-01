@@ -8,13 +8,14 @@ import {
   useColorMode,
   Flex,
 } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
-
-import MotionBox from '@/components/motion/Box';
+import { chakra } from '@chakra-ui/react';
 
 const Page404 = () => {
   const { colorMode } = useColorMode();
+  const MotionBox = motion(chakra.div);
 
   return (
     <Flex minHeight="70vh" direction="column" justifyContent="center">
@@ -25,10 +26,7 @@ const Page404 = () => {
         width={{ base: '100%', sm: '70%', md: '60%' }}
         margin="0 auto"
       >
-        <Image
-          src="/404error.svg"
-          alt="Error 404 not found Illustration"
-        />
+        <Image src="/404error.svg" alt="Error 404 not found Illustration" />
       </MotionBox>
       <Text textAlign="center" fontSize="xs" color="gray">
         <ChakraLink

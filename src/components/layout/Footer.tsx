@@ -8,8 +8,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FaInstagram, FaLinkedin } from 'react-icons/fa';
-
+import { FaInstagram, FaLinkedin, FaSchool } from 'react-icons/fa';
+import NextLink from 'next/link';
 const Footer = () => {
   const bgColor = useColorModeValue('gray.100', 'gray.900');
   const linkColor = useColorModeValue('gray.600', 'gray.300');
@@ -45,10 +45,10 @@ const Footer = () => {
         wrap="wrap"
       >
         {/* Navigation */}
-        <Link href="/about" color={linkColor}>
+        <NextLink href="/about" color={linkColor}>
           About
-        </Link>
-        <Link href="/contact" color={linkColor}>
+        </NextLink>
+        <Link href="mailto:854582@lcps.org" color={linkColor}>
           Contact
         </Link>
 
@@ -65,11 +65,14 @@ const Footer = () => {
 
         {/* Social media */}
         <HStack spacing={4}>
-          <Link href="https://instagram.com" isExternal>
+          <Link href="https://www.instagram.com/shieunpark/" isExternal>
             <Icon as={FaInstagram} boxSize={6} color={linkColor} />
           </Link>
-          <Link href="https://linkedin.com" isExternal>
-            <Icon as={FaLinkedin} boxSize={6} color={linkColor} />
+          <Link
+            href="https://learn.lcps.org/course/6074661797/materials"
+            isExternal
+          >
+            <Icon as={FaSchool} boxSize={6} color={linkColor} />
           </Link>
         </HStack>
       </Flex>

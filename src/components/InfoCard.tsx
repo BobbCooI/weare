@@ -1,5 +1,5 @@
 import { TiWeatherCloudy } from 'react-icons/ti';
-import { ForecastDay, ForecastResponse } from '@/lib/types/weather_api';
+import { Alert, ForecastDay, ForecastResponse } from '@/lib/types/weather_api';
 import { useEffect, useState } from 'react';
 import {
   Box,
@@ -39,25 +39,27 @@ const InfoCard = ({ forecast }: { forecast: ForecastResponse }) => {
         borderWidth={3}
         boxShadow="md"
         p="4"
-        transition="all 0.2s ease-in-out"
         _hover={{ transform: 'scale(1.01)' }}
+        transition="all 0.2s ease-in-out"
         className="hover:shadow-lg"
       >
         <Text fontWeight="bold" fontSize="xl">
           Current Information
         </Text>
         <Box mt="4">
-          <Text fontWeight="medium" fontSize="md" pb={2}>
-            UV Index: {forecast.current.uv}
-          </Text>
-          <Divider />
-          <Text fontWeight="medium" fontSize="md" pt={2} pb={2}>
-            Humidity Level {forecast.current.humidity}
-          </Text>
-          <Divider />
-          <Text fontWeight="medium" fontSize="md" pt={2}>
-            Condition {forecast.current.condition.text}
-          </Text>{' '}
+          {forecast.alerts
+            ? forecast.alerts.map((alert: Alert, ind: number) => (
+                <>
+                  <Text fontWeight="medium" fontSize="md" pb={2}>
+                    Alert {ind} : {alert.headline} effecting {alert.areas}
+                  </Text>
+                  <Text fontWeight="medium" fontSize="sm" pb={2}>
+                    {alert.effective}
+                  </Text>
+                  <Divider />
+                </>
+              ))
+            : 'Alerts: NONE'}
         </Box>
       </Box>
     </motion.div>
