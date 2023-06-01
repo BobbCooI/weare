@@ -22,7 +22,8 @@
     "next-seo": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.8.0"
+    "react-icons": "^4.8.0",
+    "react-spring": "^9.7.1"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.3",

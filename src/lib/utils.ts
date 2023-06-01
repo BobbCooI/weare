@@ -3,8 +3,8 @@ export async function getWeather(city?: string) {
   const data = await res.json();
   return data;
 }
-export async function getForecast(city?: string) {
-  const res = await fetch(`/api/forecast?city=${city ? city : ''}`);
+export async function getForecast(lat: number, lon: number) {
+  const res = await fetch(`/api/forecast?q=${lat},${lon}`);
   const data = await res.json();
   return data;
 }
@@ -15,6 +15,8 @@ export async function getSearchSuggestion(city?: string) {
     return data;
   }
   
+ 
+
  export const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number, unit?: "K" | "N") => {
     if ((lat1 === lat2) && (lon1 === lon2)) {
         return 0;

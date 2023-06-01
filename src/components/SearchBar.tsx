@@ -161,7 +161,7 @@ const SearchBar = ({
                   </Text>
                   <Text fontSize="sm" mb={2}>
                     {suggestion.region}{' '}
-                    {coords
+                    {distance
                       ? `  |   ${distance} mi. away`
                       : ''}
                   </Text>

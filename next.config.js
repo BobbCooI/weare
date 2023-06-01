@@ -14,5 +14,14 @@ module.exports = withPWA({
   eslint: {
     dirs: ["src"],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.weatherapi.com',
+      },
+      
+    ]
+  }
   
 });

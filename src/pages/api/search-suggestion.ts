@@ -1,26 +1,20 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import axios from 'axios';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-const getSearchSuggestion = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-  const { city } = req.query;
-  //request weather api search autocomplete with axios
-  //return response
+const getSearchSuggestion = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const response = await axios.get(
-      `https://api.weatherapi.com/v1/search.json?key=${process.env.WEATHER_API_KEY}&q=${city}`
-    );
+    const { city } = req.query;
+    const url = `https://api.weatherapi.com/v1/search.json?key=${process.env.WEATHER_API_KEY}&q=${city}`;
+
+    const response = await axios.get(url);
     if (response.status !== 200) {
-     return res.json({ success: false, error: 'no' });
-    };
+      return res.status(500).json({ success: false, error: 'Failed to retrieve search suggestions' });
+    }
+
     res.json({ success: true, data: response.data });
-  } catch (e) {
-    console.error(e);
-    res.status(404).end()
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: 'An error occurred while fetching search suggestions' });
   }
 };
 

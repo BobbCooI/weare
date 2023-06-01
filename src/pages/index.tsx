@@ -10,15 +10,20 @@ import { NextSeo } from 'next-seo';
 import SearchBar from '@/components/SearchBar';
 import { useEffect, useState } from 'react';
 import { Location } from '@/lib/types/weather_api';
+import { getForecast } from '@/lib/utils';
+import ForecastCard from '@/components/ForecastCard';
+import MetricsCard from '@/components/MetricsCard';
+import InfoCard from '@/components/InfoCard';
 
 const Home = () => {
   const bgColor = useColorModeValue('gray.100', 'gray.900');
-  const [lat, setLat] = useState<number>();
-  const [lon, setLon] = useState<number>();
+  const [latUser, setLatUser] = useState<number>();
+  const [longUser, setLonUser] = useState<number>();
   const [selectedSuggestion, setSelectedSuggestion] = useState<Location>();
-
+  const [fetchedWeather, setFetchedWeather] = useState();
   const toast = useToast();
 
+  // get user's relative location
   useEffect(() => {
     if (!navigator.geolocation) {
       toast({
@@ -28,8 +33,8 @@ const Home = () => {
     } else {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLat(position.coords.latitude);
-          setLon(position.coords.longitude);
+          setLatUser(position.coords.latitude);
+          setLonUser(position.coords.longitude);
         },
         () => {
           toast({
@@ -41,6 +46,33 @@ const Home = () => {
     }
   }, [toast]);
 
+  useEffect(() => {
+    const fetchAndSetForecast = async () => {
+      const response = await getForecast(
+        selectedSuggestion!.lat,
+        selectedSuggestion!.lon
+      );
+      if (response.success) {
+        setFetchedWeather(response.data);
+        toast({
+          description: `fetched weather for ${selectedSuggestion!.name}`,
+          status: 'success',
+          duration: 2000,
+        });
+      } else {
+        // shouldn't happen unless a bug in the api
+        toast({
+          description: response.error + ' - Please report to developer',
+          status: 'error',
+          duration: 10000,
+        });
+      }
+    };
+
+    if (selectedSuggestion) {
+      fetchAndSetForecast();
+    }
+  }, [selectedSuggestion]);
   const handleSuggestionSelect = (suggestion: Location) => {
     setSelectedSuggestion(suggestion);
   };
@@ -57,18 +89,31 @@ const Home = () => {
       <Box mt={3} data-name="weather_stuff">
         <SearchBar
           onSuggestionSelect={handleSuggestionSelect}
-          coords={{
-            latitude: lat as number,
-            longitude: lon as number,
-          }}
+          coords={
+            latUser && longUser
+              ? { latitude: latUser as number, longitude: longUser as number }
+              : undefined
+          }
         />
       </Box>
-      {selectedSuggestion && (
-        <Box>
-          <Heading>Selected Suggestion:</Heading>
-          <Text>{selectedSuggestion.name}</Text>
-          {/* Render additional information about the selected weather suggestion. CHECKPOINT 1 */}
-        </Box>
+      {selectedSuggestion && fetchedWeather && (
+        <Flex
+          justifyContent="space-around"
+          bgColor={bgColor}
+          mt={2}
+          borderColor="red"
+          borderWidth={2}
+        >
+          <Box flex="1" mx={2}>
+            <MetricsCard forecast={fetchedWeather} />
+          </Box>
+          <Box flex="2" mx={2}>
+            <ForecastCard forecast={fetchedWeather} />
+          </Box>
+          <Box flex="1" mx={2}>
+            <InfoCard forecast={fetchedWeather} />
+          </Box>
+        </Flex>
       )}
       <NextSeo title="Home" />
     </Flex>
