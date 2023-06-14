@@ -5,7 +5,8 @@ import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const ForecastCard = ({ forecast }: { forecast: ForecastResponse }) => {
+const ForecastCard = ({ forecast , onDaySelect }: { forecast: ForecastResponse ,  onDaySelect: (day: ForecastDay) => void;
+}) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const linkColor = useColorModeValue('gray.600', 'gray.300');
   const bgColor = useColorModeValue('gray.100', 'gray.900');
@@ -60,7 +61,10 @@ const ForecastCard = ({ forecast }: { forecast: ForecastResponse }) => {
               {forecast.forecast.forecastday
                 .slice(0, 5)
                 .map((item: ForecastDay) => (
-                  <Box key={item.date} m="2">
+                  <Box key={item.date} m="2"
+                    onClick={() => onDaySelect(item)}
+                    cursor="pointer"
+                  >
                     <Text fontWeight="medium" fontSize="md">
                       {new Date(item.date).toLocaleDateString('en-US', {
                         weekday: 'short',

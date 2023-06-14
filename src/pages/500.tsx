@@ -10,11 +10,14 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { NextSeo } from 'next-seo';
+import { motion } from 'framer-motion';
+import { chakra } from '@chakra-ui/react';
 
-import MotionBox from '@/components/motion/Box';
 
 const Page500 = () => {
   const colorMode = useColorModeValue('gray.300', 'teal.500');
+
+const MotionBox = motion(chakra.div);
   return (
     <Flex minHeight="70vh" direction="column" justifyContent="center">
       <NextSeo title="500 Server Side Error Occured" />

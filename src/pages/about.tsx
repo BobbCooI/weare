@@ -7,7 +7,6 @@ const About = () => {
         <Text
           textAlign="center"
           fontSize="md"
-          color="white"
           overflowWrap="break-word"
         >
           hello! this is ryan's ap computer science a project. it is very simple

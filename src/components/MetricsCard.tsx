@@ -33,11 +33,11 @@ const MetricsCard = ({ forecast }: { forecast: ForecastResponse }) => {
         </Text>
         <Box mt="4">
           <Text fontWeight="medium" fontSize="md" pb={2}>
-            UV Index: {forecast.current.uv}
+            UV Index: {forecast.current.uv} / 10
           </Text>
           <Divider />
           <Text fontWeight="medium" fontSize="md" pt={2} pb={2}>
-            Humidity Level: {forecast.current.humidity}
+            Humidity Level: {forecast.current.humidity}%
           </Text>
           <Divider />
           <Text fontWeight="medium" fontSize="md" pt={2}>

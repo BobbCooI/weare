@@ -1,6 +1,7 @@
 import {
   Box,
   Flex,
+  HStack,
   Heading,
   Text,
   useColorModeValue,
@@ -9,11 +10,12 @@ import {
 import { NextSeo } from 'next-seo';
 import SearchBar from '@/components/SearchBar';
 import { useEffect, useState } from 'react';
-import { Location } from '@/lib/types/weather_api';
+import { ForecastDay, Location } from '@/lib/types/weather_api';
 import { getForecast } from '@/lib/utils';
 import ForecastCard from '@/components/ForecastCard';
 import MetricsCard from '@/components/MetricsCard';
 import InfoCard from '@/components/InfoCard';
+import HourlyCard from '@/components/HourlyCard';
 
 const Home = () => {
   const bgColor = useColorModeValue('gray.100', 'gray.900');
@@ -21,6 +23,9 @@ const Home = () => {
   const [longUser, setLonUser] = useState<number>();
   const [selectedSuggestion, setSelectedSuggestion] = useState<Location>();
   const [fetchedWeather, setFetchedWeather] = useState();
+  const [selectedDayForHourly, setSelectedDayForHourly] =
+    useState<ForecastDay>();
+
   const toast = useToast();
 
   // get user's relative location
@@ -76,6 +81,9 @@ const Home = () => {
   const handleSuggestionSelect = (suggestion: Location) => {
     setSelectedSuggestion(suggestion);
   };
+  const handleHourlySelect = (hourly: ForecastDay) => {
+    setSelectedDayForHourly(hourly);
+  };
 
   return (
     <Flex
@@ -97,17 +105,34 @@ const Home = () => {
         />
       </Box>
       {selectedSuggestion && fetchedWeather && (
-        <Flex justifyContent="space-around" bgColor={bgColor} mt={2}>
-          <Box flex="1" mx={2}>
-            <MetricsCard forecast={fetchedWeather} />
+        <>
+          <Flex
+            justifyContent="space-around"
+            flex-wrap="wrap"
+            bgColor={bgColor}
+            borderColor="red"
+            borderWidth="4px"
+            mt={2}
+          >
+            <Box flex="1" mx={2}>
+              <MetricsCard forecast={fetchedWeather} />
+            </Box>
+            <Box flex="1" mx={2}>
+              <InfoCard forecast={fetchedWeather} />
+            </Box>
+            <Box flex="1" mx={2}>
+              <ForecastCard
+                forecast={fetchedWeather}
+                onDaySelect={setSelectedDayForHourly}
+              />
+            </Box>
+          </Flex>
+          <Box  mt={2}>
+            {selectedDayForHourly && (
+              <HourlyCard forecastday={selectedDayForHourly} />
+            )}
           </Box>
-          <Box flex="2" mx={2}>
-            <ForecastCard forecast={fetchedWeather} />
-          </Box>
-          <Box flex="1" mx={2}>
-            <InfoCard forecast={fetchedWeather} />
-          </Box>
-        </Flex>
+        </>
       )}
       <NextSeo title="Home" />
     </Flex>

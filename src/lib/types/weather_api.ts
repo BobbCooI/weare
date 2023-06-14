@@ -102,7 +102,7 @@ interface Astro {
   moon_illumination: number;
 }
 
-interface Hour {
+export interface Hour {
   time_epoch: number;
   time: string;
   temp_c: number;
