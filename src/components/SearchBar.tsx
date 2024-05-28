@@ -136,7 +136,7 @@ const SearchBar = ({
                     ) * 10
                   ) / 10
                 : 0;
-
+ 
               return (
                 <motion.div
                   key={suggestion.id}
