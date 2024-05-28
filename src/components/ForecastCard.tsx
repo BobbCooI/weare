@@ -34,6 +34,8 @@ const ForecastCard = ({ forecast , onDaySelect }: { forecast: ForecastResponse ,
         p="4"
         transition="all 0.2s ease-in-out"
         className="hover:shadow-lg"
+        _hover={{ transform: 'scale(1.01)' }}
+
       >
         <Flex
           direction={{ base: 'column', md: 'row' }}

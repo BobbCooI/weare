@@ -6,6 +6,7 @@ import {
   Icon,
   HStack,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { FaInstagram } from 'react-icons/fa';
@@ -13,10 +14,20 @@ import NextLink from 'next/link';
 const Footer = () => {
   const bgColor = useColorModeValue('gray.100', 'gray.900');
   const linkColor = useColorModeValue('gray.600', 'gray.300');
-
+  const toast = useToast();
   const variants = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  };
+
+  const onClickContact = () => {
+    navigator.clipboard.writeText('rynguwork@gmail.com');
+    toast({
+      title: 'my email is copied to your clipboard!',
+      status: 'success',
+      duration: 2000,
+      isClosable: true,
+    });
   };
 
   const MotionBox = motion(Box);
@@ -48,7 +59,10 @@ const Footer = () => {
         <NextLink href="/about" color={linkColor}>
           About
         </NextLink>
-        <Link href="mailto:854582@lcps.org" color={linkColor}>
+        <Link
+          onClick={onClickContact}
+          color={linkColor}
+        >
           Contact
         </Link>
 

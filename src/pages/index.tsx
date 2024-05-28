@@ -104,21 +104,21 @@ const Home = () => {
             justifyContent="space-around"
             flex-wrap="wrap"
             bgColor={bgColor}
-            borderWidth="4px"
             mt={2}
           >
-            <Box flex="1" mx={2}>
-              <MetricsCard forecast={fetchedWeather} />
-            </Box>
-            <Box flex="1" mx={2}>
-              <InfoCard forecast={fetchedWeather} />
-            </Box>
-            <Box flex="1" mx={2}>
+              <Box mx={2}>
               <ForecastCard
                 forecast={fetchedWeather}
                 onDaySelect={setSelectedDayForHourly}
               />
             </Box>
+            <Box mx={2}>
+              <MetricsCard forecast={fetchedWeather} />
+            </Box>
+            <Box  mx={2}>
+              <InfoCard forecast={fetchedWeather} />
+            </Box>
+          
           </Flex>
           <Box  mt={2}>
             {selectedDayForHourly && (

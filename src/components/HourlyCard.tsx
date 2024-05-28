@@ -2,7 +2,7 @@ import { ForecastDay, Hour } from '@/lib/types/weather_api';
 import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 const HourlyCard = ({ forecastday }: { forecastday: ForecastDay }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const bgColor = useColorModeValue('gray.100', 'gray.900');
@@ -32,25 +32,21 @@ const HourlyCard = ({ forecastday }: { forecastday: ForecastDay }) => {
           borderColor="black"
           borderWidth={3}
           boxShadow="md"
-          p="4"
+          p="10"
           _hover={{ transform: 'scale(1.01)' }}
           transition="all 0.2s ease-in-out"
           className="hover:shadow-lg"
         >
           <Text fontWeight="bold" fontSize="xl">
-            Hourly Forecast
+            Hourly Forecast for{' '}
+            {new Date(forecastday.date).toLocaleDateString()}
           </Text>
-          <Box mt="4">
-            <LineChart
-              width={600}
-              height={300}
-              data={lineData}
-              margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-            >
+          <Box mt="5">
+            <LineChart width={600} height={300} data={lineData}>
               <Line type="monotone" dataKey="temp" stroke="#8884d8" />
-
-              <XAxis label="Hour" />
-              <YAxis label="(°F)"/>
+              <XAxis />
+              <YAxis />
+              <Tooltip />
             </LineChart>
           </Box>
         </Box>
