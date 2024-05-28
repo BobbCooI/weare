@@ -110,7 +110,6 @@ const Home = () => {
             justifyContent="space-around"
             flex-wrap="wrap"
             bgColor={bgColor}
-            borderColor="red"
             borderWidth="4px"
             mt={2}
           >

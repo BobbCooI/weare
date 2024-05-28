@@ -1,0 +1,8 @@
+1. make sure you have nodejs installed https://nodejs.org/en
+2. download the zip, open it in your code editor (I use vscode)
+in the terminal  (control shift ~) just do "npm install" and wait for packages to install
+3. make a ".env" file and get an api key from https://www.weatherapi.com/ , name it as WEATHER_API_KEY="" in the ".env" file
+4. run "npm run dev" in terminal
+5. test website in localhost
+
+6. if you don't wanna do all that setup i just attached a video to show you the progress i've done. i used nextjs as my framework and implemented styles/light-dark mode and searching for locations so far

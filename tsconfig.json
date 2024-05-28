@@ -41,7 +41,6 @@
     "**/*.ts",
     "**/*.tsx",
     "src",
-    "commitlint.config.js",
     "components",
     "src/lib",
     ".next/types/**/*.ts"
