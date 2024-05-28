@@ -87,7 +87,7 @@ const SearchBar = ({
     if (debouncedSearchTerm) {
       fetchSearchSuggestions();
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, toast]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -96,7 +96,7 @@ const SearchBar = ({
   return (
     <div style={{ position: 'relative' }}>
       <InputGroup>
-        <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
+        <InputLeftElement pointerEvents="none" ><SearchIcon /></InputLeftElement>
         <Input
           type="text"
           placeholder="Search for a city"

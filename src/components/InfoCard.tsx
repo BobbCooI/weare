@@ -1,20 +1,15 @@
-import { TiWeatherCloudy } from 'react-icons/ti';
-import { Alert, ForecastDay, ForecastResponse } from '@/lib/types/weather_api';
+import { Alert, ForecastResponse } from '@/lib/types/weather_api';
 import { useEffect, useState } from 'react';
 import {
   Box,
   Divider,
-  Flex,
-  Icon,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 const InfoCard = ({ forecast }: { forecast: ForecastResponse }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const linkColor = useColorModeValue('gray.600', 'gray.300');
   const bgColor = useColorModeValue('gray.100', 'gray.900');
 
   useEffect(() => {

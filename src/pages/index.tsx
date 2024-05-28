@@ -1,9 +1,6 @@
 import {
   Box,
   Flex,
-  HStack,
-  Heading,
-  Text,
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
@@ -77,12 +74,9 @@ const Home = () => {
     if (selectedSuggestion) {
       fetchAndSetForecast();
     }
-  }, [selectedSuggestion]);
+  }, [selectedSuggestion, toast]);
   const handleSuggestionSelect = (suggestion: Location) => {
     setSelectedSuggestion(suggestion);
-  };
-  const handleHourlySelect = (hourly: ForecastDay) => {
-    setSelectedDayForHourly(hourly);
   };
 
   return (

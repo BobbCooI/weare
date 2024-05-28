@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FaInstagram, FaLinkedin, FaSchool } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
 import NextLink from 'next/link';
 const Footer = () => {
   const bgColor = useColorModeValue('gray.100', 'gray.900');
@@ -60,19 +60,13 @@ const Footer = () => {
           textAlign={{ base: 'center', md: 'left' }}
         >
           &copy; {new Date().getFullYear()} Weare. all rights reserved. ryan
-          apcsa 22-23
+          apcsa 22-24
         </Text>
 
         {/* Social media */}
         <HStack spacing={4}>
-          <Link href="https://www.instagram.com/shieunpark/" isExternal>
+          <Link href="https://www.instagram.com/" isExternal>
             <Icon as={FaInstagram} boxSize={6} color={linkColor} />
-          </Link>
-          <Link
-            href="https://learn.lcps.org/course/6074661797/materials"
-            isExternal
-          >
-            <Icon as={FaSchool} boxSize={6} color={linkColor} />
           </Link>
         </HStack>
       </Flex>

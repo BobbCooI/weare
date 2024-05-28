@@ -8,7 +8,6 @@ import Image from 'next/image';
 const ForecastCard = ({ forecast , onDaySelect }: { forecast: ForecastResponse ,  onDaySelect: (day: ForecastDay) => void;
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const linkColor = useColorModeValue('gray.600', 'gray.300');
   const bgColor = useColorModeValue('gray.100', 'gray.900');
 
   useEffect(() => {

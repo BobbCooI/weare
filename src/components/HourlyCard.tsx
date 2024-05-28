@@ -1,11 +1,10 @@
-import { ForecastDay, ForecastResponse, Hour } from '@/lib/types/weather_api';
-import { Box, Divider, Text, useColorModeValue } from '@chakra-ui/react';
+import { ForecastDay, Hour } from '@/lib/types/weather_api';
+import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
 const HourlyCard = ({ forecastday }: { forecastday: ForecastDay }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const linkColor = useColorModeValue('gray.600', 'gray.300');
   const bgColor = useColorModeValue('gray.100', 'gray.900');
   const lineData = forecastday.hour.map((hour: Hour) => ({
     name: parseInt(hour.time.split(' ')[1].split(':')[0]),

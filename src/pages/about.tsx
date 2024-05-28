@@ -9,10 +9,11 @@ const About = () => {
           fontSize="md"
           overflowWrap="break-word"
         >
-          hello! this is ryan's ap computer science a project. it is very simple
+          hello! this is ryan&apos;s ap computer science a project. it is very simple
           and definitely not the best, but this was all i could do with the time
-          i had... it is 1:48am the night it is due.. may 31, 2023. i strive to improve this
-          website and make this a good learning experience.
+          i had... 
+        {/*it is 1:48am the night it is due.. may 31, 2023. i strive to improve this
+          website and make this a good learning experience.*/}
         </Text>
       </Box>
     </Flex>
